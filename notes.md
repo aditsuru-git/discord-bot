@@ -8,8 +8,8 @@
     description: ""
     options: [
     {
-        name: "lowercase-nospace"
-        description: ""
+        name: "lowercase-nospace",
+        description: "",
         type: ApplicationCommandOptionType.datatype,
         required: false,
     },
