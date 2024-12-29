@@ -33,7 +33,7 @@ Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
 )
 ```
 
-# Boilerplat for commands compatible with slash command and prefix command handler
+# Boilerplate Template for commands compatible with slash command and prefix command handler
 
 ```
 const { ApplicationCommandOptionType } = require("discord.js");
@@ -59,13 +59,13 @@ module.exports = {
     if (isPrefix) {
 
       }
-    }
+
     //Slash command logic
     else if (optionValue) {
 
     }
 
-    input.reply();
+    interaction.reply();
   },
 };
 ```
