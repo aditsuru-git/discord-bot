@@ -1,30 +1,29 @@
-const { ApplicationCommandOptionType } = require("discord.js");
-const getArrayElements = require("../../utils/getArrayElements");
-
 module.exports = {
   name: "ping",
   description: "Replies with pong",
-  options: [
-    {
-      name: "websocket",
-      description: "WebSocket",
-      type: ApplicationCommandOptionType.Boolean,
-    },
-  ],
-  callback: async (client, input, ...args) => {
+  callback: async (client, interaction, ...args) => {
     const isPrefix = args.pop();
-    const arg1 = getArrayElements(args, 1)[0];
-    const calculatedLatency = Date.now() - input.createdTimestamp;
-    let reply = "Pong!";
+    const wsPing = client.ws.ping >= 0 ? client.ws.ping : "N/A";
+    if (isPrefix) {
+      const messageTimestamp = interaction.createdTimestamp;
 
-    const includeWsLatency = isPrefix
-      ? arg1 === "ws"
-      : input.options.get("websocket")?.value;
+      const reply = await interaction.reply("Pinging...");
 
-    if (includeWsLatency) {
-      reply += `\nWebSocket: ${calculatedLatency}ms`;
+      const ping = reply.createdTimestamp - messageTimestamp;
+
+      reply.edit(
+        `Pong!\n\`\`\`Latency: ${ping} ms\nWebSocket: ${wsPing} ms\`\`\``
+      );
+      return;
     }
+    await interaction.deferReply();
 
-    input.reply(reply);
+    const reply = await interaction.fetchReply();
+
+    const ping = reply.createdTimestamp - interaction.createdTimestamp;
+
+    interaction.editReply(
+      `Pong!\n\`\`\`Latency: ${ping} ms\nWebSocket: ${wsPing} ms\`\`\``
+    );
   },
 };

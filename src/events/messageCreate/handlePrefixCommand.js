@@ -17,7 +17,7 @@ module.exports = async (client, message) => {
     await commandObject.callback(client, message, ...args, true);
   } catch (error) {
     console.log(
-      `[MSGCREATE] There was an error running this command: ${error}`
+      `[MSG-CREATE] There was an error running this command: ${error}`
     );
   }
 };

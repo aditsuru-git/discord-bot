@@ -50,7 +50,7 @@ module.exports = {
       required: false,
     },
   ],
-  callback: async (client, input, ...args) => {
+  callback: async (client, interaction, ...args) => {
     const isPrefix = args.pop();
     const userArgs = args; // Remaining arguments from prefix handler
 
