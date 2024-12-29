@@ -2,6 +2,7 @@
 
 - are stored in a array as objects.
 - each object has properties:
+
   - ```
     name: "lowercase-nospace"
     description: ""
@@ -14,6 +15,11 @@
     },
     ...
     ]
+    permissionRequired: []
+    deleted: Boolean,
+    execute(client, interaction){
+
+    },
     ```
 
 # Registering commands
