@@ -69,3 +69,30 @@ module.exports = {
   },
 };
 ```
+
+# Code for Permission check in slash command handler
+
+```
+const member = interaction.guild.members.cache.get(interaction.user.id);
+if (!member.permissions.has(["ADMINISTRATOR", "MANAGE_MESSAGES"]))
+{
+    await interaction.reply({
+    content: "Permission denied.",
+    ephemeral: true,
+    });
+    return;
+}
+```
+
+# Code for Permission check in prefix command handler
+
+```
+const user = interaction.guild.members.cache.get(interaction.author.id);
+if (!user.permissions.has(PermissionFlagsBits.ManageMessages) && !user.permissions.has(PermissionFlagsBits.Administrator)) {
+    await interaction.reply({
+    content: "Permission denied.",
+    ephemeral: true,
+    });
+    return;
+}
+```

@@ -89,7 +89,7 @@ module.exports = {
       const member = interaction.guild.members.cache.get(interaction.user.id);
 
       if (!member.permissions.has(["ADMINISTRATOR", "MANAGE_MESSAGES"])) {
-        interaction.reply({
+        await interaction.reply({
           content: "Permission denied.",
           ephemeral: true,
         });
