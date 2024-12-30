@@ -36,7 +36,7 @@ module.exports = {
     let isAll = false;
 
     if (isPrefix) {
-      count = Math.floor(userArgs[0]) + 1;
+      count = Math.floor(userArgs[0]);
 
       inputUserId = userArgs[1];
 
@@ -73,7 +73,6 @@ module.exports = {
       }
     } else {
       count = Math.floor(interaction.options.getInteger("count"));
-      count++;
 
       inputUserId = interaction.options.getUser("user");
 

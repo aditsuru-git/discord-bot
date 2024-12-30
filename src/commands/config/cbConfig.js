@@ -1,11 +1,11 @@
-const chatbotConfig = require("../../models/chatbotConfigSchema");
+const channelConfig = require("../../models/channelConfigSchema");
 const getArrayElements = require("../../utils/getArrayElements");
 const {
   ApplicationCommandOptionType,
   PermissionFlagsBits,
 } = require("discord.js");
 const getChannelId = require("../../utils/getChannelId");
-
+const channelName = "cb-channel";
 module.exports = {
   name: "cbconfig",
   description: "Setup chatbot channel",
@@ -51,15 +51,16 @@ module.exports = {
       lchannelId = interaction.options.getChannel("channel").id;
     }
 
-    const chatbot = await chatbotConfig.findOne({
-      channelId: { $exists: true },
+    const chatbot = await channelConfig.findOne({
+      name: channelName,
     });
 
     if (chatbot) {
       chatbot.channelId = lchannelId;
       await chatbot.save();
     } else {
-      const newChatbot = new chatbotConfig({
+      const newChatbot = new channelConfig({
+        name: channelName,
         channelId: lchannelId,
       });
       await newChatbot.save();
